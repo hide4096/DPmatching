@@ -11,7 +11,7 @@ csv_file = args[1]
 df = pd.read_csv(csv_file, index_col=0)
 
 # ヒートマップを描画
-plt.figure(figsize=(20, 16))
+plt.figure(figsize=(20, 20))
 sns.set(font_scale=0.4)  # フォントサイズを調整
 sns.heatmap(df, cmap='BuGn', annot=True, fmt=".2f", cbar=False, vmin=df.min().min(), vmax=df.max().max(), linewidths=0.2, linecolor='lightgray')
 plt.xlabel('File 2')

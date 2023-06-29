@@ -15,7 +15,7 @@ calculate_similarity() {
     local file1="$1"
     local file2="$2"
     # 類似度を計算するプログラムを実行し、結果を返す
-    similarity=$(./a.out "$file1" "$file2")
+    similarity=$(./simillar "$file1" "$file2")
     echo "$similarity"
 }
 
