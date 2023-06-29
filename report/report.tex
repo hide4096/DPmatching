@@ -6,6 +6,7 @@
 \usepackage{lipsum}
 \usepackage{listings}
 \usepackage{filecontents}
+\usepackage{subcaption}
 
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 
@@ -40,45 +41,45 @@
 
 \section{目的}
 
-DPマッチングのアルゴリズムを利用して、小語彙の音声認識の実験を行う。
+DPマッチングのアルゴリズムを利用して,小語彙の音声認識の実験を行う.
 
 \section{実験方法}
 
-DPマッチングのアルゴリズムによって音声データの単語間距離を計算するプログラムを作成する。
-そのプログラムに、100単語の音声データのテンプレートに対して、同じ発声内容の100単語を未知入力音声として、順に入力していく。
-入力された音声データの発声内容を判定し、その正答率を計算する。
+DPマッチングのアルゴリズムによって音声データの単語間距離を計算するプログラムを作成する.
+そのプログラムに,100単語の音声データのテンプレートに対して,同じ発声内容の100単語を未知入力音声として,順に入力していく.
+入力された音声データの発声内容を判定し,その正答率を計算する.
 
 \subsection{使用したデータセットについて}
 
-この実験で使用した音声データセットには、2人の話者がそれぞれ同じ100種類の単語を発話したものが含まれている。
-話者は100種類の単語の発話を2回行っているため、合計400個の音声データが含まれている。
-1つの音声データにはファイル名、発声内容、フレーム数とフレーム数分の15次のメルケプストラム特徴量である。
+この実験で使用した音声データセットには,2人の話者がそれぞれ同じ100種類の単語を発話したものが含まれている.
+話者は100種類の単語の発話を2回行っているため,合計400個の音声データが含まれている.
+1つの音声データにはファイル名,発声内容,フレーム数とフレーム数分の15次のメルケプストラム特徴量である.
 
 \subsection{単語間距離の計算}
 
-実験ではDPマッチングのアルゴリズムを用いて2つの音声データの単語間距離を計算する。
-単語間距離の計算は以下の手順で行う。
+実験ではDPマッチングのアルゴリズムを用いて2つの音声データの単語間距離を計算する.
+単語間距離の計算は以下の手順で行う.
 
-入力として与えられた2つの音声データのフレーム長をそれぞれ$I$と$J$とする。
-$(i,j),0<i\leq I ,0<j\leq J$で表せられる2つの音声データの各ノードのメルケプストラム特徴量の距離を計算し、
-$(i,j)$でのフレームの距離を局所距離$d(i,j)$と表す。
-音声データの最初のフレームから任意のフレームまでの局所距離の総和を累積距離$g(i,j)$とする。
-最終フレームでの累積距離$g(I,J)$が最小となるような経路を探索することで、単語間距離を計算する。
+入力として与えられた2つの音声データのフレーム長をそれぞれ$I$と$J$とする.
+$(i,j),0<i\leq I ,0<j\leq J$で表せられる2つの音声データの各ノードのメルケプストラム特徴量の距離を計算し,
+$(i,j)$でのフレームの距離を局所距離$d(i,j)$と表す.
+音声データの最初のフレームから任意のフレームまでの局所距離の総和を累積距離$g(i,j)$とする.
+最終フレームでの累積距離$g(I,J)$が最小となるような経路を探索することで,単語間距離を計算する.
 
 \subsection{最終フレームでの累積距離の計算}
 
-はじめに、初期条件を以下のように設定する。
+はじめに,初期条件を以下のように設定する.
 \[
     g(0,0) = d(0,0)
 \]
-次に境界条件を以下のように設定する。
+次に境界条件を以下のように設定する.
 \[
     j>0 \rightarrow g(0,j) = g(0,j-1) + d(0,j)
 \]
 \[
     i>0 \rightarrow g(i,0) = g(i-1,0) + d(i,0)
 \]
-最後に、再帰的に以下の式を用いて、最終フレームでの累積距離$g(I,J)$を計算する。
+最後に,再帰的に以下の式を用いて,最終フレームでの累積距離$g(I,J)$を計算する.
 \[
 g(i, j)=\min \left[\begin{array}{llr}
 g(i, j-1) & + & d(i, j) \\
@@ -88,8 +89,7 @@ g(i-1, j) & + & d(i, j)
 \]
 
 \section{実験結果}
-
-音声認識の正答率は次のようになった。
+音声認識の正答率は\ref{tab:correct}の通りである.
 
 \begin{table}[htbp]
     \centering
@@ -107,46 +107,66 @@ g(i-1, j) & + & d(i, j)
       \hline
     \end{tabular}
     \caption{音声認識の正答率}
-    \label{tab:音声認識の正答率}
-  \end{table}
+    \label{tab:correct}
+\end{table}
+
 
 \newpage
 
 \section{考察}
-実験結果より、同一話者よりも異なる話者の音声データの方が正答率が低いことが読み取れる。
-\begin{figure}[h]
-    \centering
-    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./equal.png}
-    \caption{同じ音声データ}
-    \label{fig:equal}
-\end{figure}
+実験結果より,同一話者よりも異なる話者の音声データの方が正答率が低いことが読み取れる.
+これは,同一話者の音声データの方が,異なる話者の音声データよりも似ているため,
+プログラムによって求められた単語間距離も小さくなり,正答率が高くなったと考えられる.
+
+ここで話者や発声単語の違いが正答率に与える影響を調べるために,累積距離を可視化してみる.
+同じ音声データ,同じ話者,異なる話者,異なる話者かつ異なる発声単語の4通りの音声データの組み合わせでの
+累積距離図\ref{fig:equal},図\ref{fig:same},図\ref{fig:diffpeople},図\ref{fig:diffword}に示す.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./same.png}
-    \caption{同一話者}
-    \label{fig:same}
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,bb=0.000000 0.000000 1329.122658 697.681395]{./equal.png}
+      \caption{city011\_001 \& city011\_001}
+      \label{fig:equal}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,bb=0.000000 0.000000 1329.122658 697.681395]{./same.png}
+      \caption{city011\_001 \& city012\_001}
+      \label{fig:same}
+    \end{subfigure}
+  
+    \vspace{0.5cm} % 行間のスペース調整
+  
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,bb=0.000000 0.000000 1329.122658 697.681395]{./diffpeople.png}
+      \caption{}
+      \caption{city011\_001 \& city021\_001}
+      \label{fig:diffpeople}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,bb=0.000000 0.000000 1329.122658 697.681395]{./diffword.png}
+      \caption{city011\_001 \& city021\_011}
+      \label{fig:diffword}
+    \end{subfigure}
+  
+    \caption{累積距離のマップ}
+    \label{fig:grid}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./diffpeople.png}
-    \caption{異なる話者}
-    \label{fig:diffpeople}
-\end{figure}
+同じ発声内容である
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./diffword.png}
-    \caption{異なる話者かつ異なる単語}
-    \label{fig:diffworde}
-\end{figure}
 
 \newpage
 
 \appendix
 \section{付録}
-この実験で使用したプログラムのソースコードを以下に示す。
+この実験で使用したプログラムのソースコードを以下に示す.
 
 \subsection{付録A: 単語間距離を求めるプログラム}
 \lstinputlisting[language=c]{../two_words.c}

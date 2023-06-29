@@ -7,6 +7,6 @@
 \contentsline {section}{\numberline {4}考察}{3}{}%
 \contentsline {section}{\numberline {A}付録}{4}{}%
 \contentsline {subsection}{\numberline {A.1}付録A: 単語間距離を求めるプログラム}{4}{}%
-\contentsline {subsection}{\numberline {A.2}付録B:正答率を計算するプログラム}{8}{}%
-\contentsline {subsection}{\numberline {A.3}付録C:可視化するプログラム}{9}{}%
+\contentsline {subsection}{\numberline {A.2}付録B:正答率を計算するプログラム}{7}{}%
+\contentsline {subsection}{\numberline {A.3}付録C:可視化するプログラム}{8}{}%
 \contentsfinish 
