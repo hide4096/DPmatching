@@ -1,0 +1,119 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{titletoc}
+\usepackage{lipsum}
+
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+\title{DPマッチングによる単語音声の認識}
+\author{麻生英寿 \\ 21C1005}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{目的}
+DPマッチングのアルゴリズムを利用して、小語彙の音声認識の実験を行う。
+
+\section{実験方法}
+DPマッチングのアルゴリズムによって音声データの単語間距離を計算するプログラムを作成する。
+そのプログラムに、100単語の音声データのテンプレートに対して、同じ発声内容の100単語を未知入力音声として、順に入力していく。
+入力された音声データの発声内容を判定し、その正答率を計算する。
+
+\subsection{使用したデータセットについて}
+この実験で使用した音声データセットには、2人の話者がそれぞれ同じ100種類の単語を発話したものが含まれている。
+話者は100種類の単語の発話を2回行っているため、合計400個の音声データが含まれている。
+1つの音声データにはファイル名、発声内容、フレーム数とフレーム数分の15次のメルケプストラム特徴量である。
+
+\subsection{単語間距離の計算}
+実験ではDPマッチングのアルゴリズムを用いて2つの音声データの単語間距離を計算する。
+単語間距離の計算は以下の手順で行う。
+
+入力として与えられた2つの音声データのフレーム長をそれぞれ$I$と$J$とする。
+$(i,j),0<i<=I,0<j<=J$で表せられる2つの音声データの各ノードのメルケプストラム特徴量の距離を計算し、
+$(i,j)$でのフレームの距離を局所距離$d(i,j)$と表す。
+音声データの最初のフレームから任意のフレームまでの局所距離の総和を累積距離$g(i,j)$とする。
+最終フレームでの累積距離$g(I,J)$が最小となるような経路を探索することで、単語間距離を計算する。
+
+\subsection{最終フレームでの累積距離の計算}
+はじめに、初期条件を以下のように設定する。
+\[
+    g(0,0) = d(0,0)
+\]
+次に境界条件を以下のように設定する。
+\[
+    j>0 \rightarrow g(0,j) = g(0,j-1) + d(0,j)
+\]
+\[
+    i>0 \rightarrow g(i,0) = g(i-1,0) + d(i,0)
+\]
+最後に、再帰的に以下の式を用いて、最終フレームでの累積距離$g(I,J)$を計算する。
+\[
+g(i, j)=\min \left[\begin{array}{llr}
+g(i, j-1) & + & d(i, j) \\
+g(i-1, j-1) & + & 2 d(i, j) \\
+g(i-1, j) & + & d(i, j)
+\end{array}\right]
+\]
+
+\section{実験結果}
+音声認識の正答率は次のようになった。
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline
+      モデル/認識対象 & city011 & city012 & city021 & city022 \\
+      \hline
+      city011 &       & 99\% & 90\%  & 84\% \\
+      \hline
+      city012 & 100\% &      & 92\%  & 86\% \\
+      \hline
+      city021 & 83\%  & 91\% &       & 99\% \\
+      \hline
+      city022 & 86\% &  94\% & 100\%  &      \\
+      \hline
+    \end{tabular}
+    \caption{音声認識の正答率}
+    \label{tab:音声認識の正答率}
+  \end{table}
+
+\section{考察}
+
+\appendix
+\section{付録}
+付録に関する内容をここに書きます。
+
+\subsection{付録A}
+付録Aの内容をここに書きます。
+
+\subsection{付録B}
+付録Bの内容をここに書きます。
+
+\newpage
+
+\section*{参考文献}
+\addcontentsline{toc}{section}{参考文献}
+
+ここに参考文献の引用を書きます。
+
+\begin{thebibliography}{9}
+\bibitem{example_reference1}
+  著者名,
+  \textit{タイトル},
+  出版社,
+  年.
+  
+\bibitem{example_reference2}
+  著者名,
+  \textit{タイトル},
+  出版社,
+  年.
+\end{thebibliography}
+
+\end{document}
