@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.euc) (TeX Live 2023) (preloaded format=platex 2023.6.15)  29 JUN 2023 23:32
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.euc) (TeX Live 2023) (preloaded format=platex 2023.6.15)  29 JUN 2023 23:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -228,8 +228,8 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
  [1
 
 ]
-Overfull \hbox (1.76617pt too wide) in paragraph at lines 63--68
-[]\JY1/mc/m/n/12 入力として与えられた \OT1/cmr/m/n/12 2 \JY1/mc/m/n/12 つの音声デ ータのフレ ーム長をそれぞれ $\OML/cmm/m/it/12 I$ \JY1/mc/m/n/12 と $\OML/cmm/m/it/12 J$ \JY1/mc/m/n/12 とする 。 $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 i; j\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0 \OML/cmm/m/it/12 <
+Overfull \hbox (1.51964pt too wide) in paragraph at lines 63--68
+[]\JY1/mc/m/n/12 入力として与えられた \OT1/cmr/m/n/12 2 \JY1/mc/m/n/12 つの音声デ ータのフレ ーム長をそれぞれ $\OML/cmm/m/it/12 I$ \JY1/mc/m/n/12 と $\OML/cmm/m/it/12 J$ \JY1/mc/m/n/12 とする\OT1/cmr/m/n/12 . $(\OML/cmm/m/it/12 i; j\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0 \OML/cmm/m/it/12 <
  []
 
 [2]
@@ -267,4 +267,4 @@ Here is how much of TeX's memory you used:
  929 hyphenation exceptions out of 8191
  79i,8n,93p,458b,1899s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.dvi (8 pages, 36332 bytes).
+Output written on report.dvi (8 pages, 37180 bytes).

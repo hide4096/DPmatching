@@ -120,7 +120,7 @@ g(i-1, j) & + & d(i, j)
 
 ここで話者や発声単語の違いが正答率に与える影響を調べるために,累積距離を可視化してみる.
 同じ音声データ,同じ話者,異なる話者,異なる話者かつ異なる発声単語の4通りの音声データの組み合わせでの
-累積距離図\ref{fig:equal},図\ref{fig:same},図\ref{fig:diffpeople},図\ref{fig:diffword}に示す.
+累積距離を図\ref{fig:equal},図\ref{fig:same},図\ref{fig:diffpeople},図\ref{fig:diffword}に示す.
 
 \begin{figure}[h]
     \centering
@@ -159,8 +159,11 @@ g(i-1, j) & + & d(i, j)
     \label{fig:grid}
 \end{figure}
 
-同じ発声内容である
-
+これらの図は縦軸と横軸がそれぞれ入力音声データのフレームを表していて,各々のマスの濃淡はそのノードでの累積距離を表している.
+色が濃いほど累積距離が大きく,色が薄いほど累積距離が小さいことを意味する.
+同じ発声内容である,図\ref{fig:equal}と図\ref{fig:same},図\ref{fig:diffpeople}では,図の左上と右下の対角線で色の分布が線対称になっている.
+しかし,同じ音声データ,同じ話者,異なる話者とデータの違いが大きくなるごとに,対称性が失われていることがわかる.
+発声内容が異なる図\ref{fig:diffword}に至っては,対称性が明らかに失われている.
 
 \newpage
 
