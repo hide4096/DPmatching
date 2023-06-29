@@ -17,12 +17,12 @@ def correct_rate(dir1, dir2):
     file_paths2 = sorted(raw_paths2)
 
     incorrect = 0
-    q = 0
-    a = 0
+    q = 1
+    a = 1
 
     for path1 in file_paths1:
         min = 10.
-        a = 0
+        a = 1
         for path2 in file_paths2:
             similarity = calculate_similarity(path1, path2)
             if q == a and similarity > min:

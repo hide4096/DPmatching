@@ -3,7 +3,8 @@
 #include <math.h>
 
 #define STRING_SIZE 64
-#define PRINT_CSV
+//#define PRINT_CSV
+#define EXPORT_G
 
 struct FILEDATA{
     char filename[STRING_SIZE];
@@ -128,12 +129,28 @@ int main(int argc,char *argv[]){
 
 
     #ifdef PRINT_CSV
-    printf("%f",distance/(frame_i+frame_j));
+    printf("%f",distance/(double)(answer.frame_num+question.frame_num));
+    #else
+    #ifdef EXPORT_G
+    for(int i=0;i<frame_i;i++){
+        printf("i_%d,",i);
+    }
+    printf("\n");
+    for(int j=0;j<frame_j;j++){
+        printf("j_%d,",j);
+        for(int i=0;i<frame_i-1;i++){
+            printf("%f,",g[i][j]);
+        }
+        printf("%f\n",g[frame_i-1][j]);
+    }
+    printf("\n");
     #else
     printf("answer word is %s",answer.mean);
     printf("question word is %s",question.mean);
+    printf("size = %dx%d\n", answer.frame_num,question.frame_num);
     printf("distance = %f\n", distance);
-    printf("distance between answer and question = %f\n", distance/(frame_i+frame_j));
+    printf("distance between answer and question = %f\n", distance/(answer.frame_num+question.frame_num));
+    #endif
     #endif
 
     free(answer.voice_data);
