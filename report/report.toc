@@ -1,13 +1,12 @@
 \contentsline {section}{\numberline {1}目的}{1}{}%
 \contentsline {section}{\numberline {2}実験方法}{1}{}%
 \contentsline {subsection}{\numberline {2.1}使用したデータセットについて}{1}{}%
-\contentsline {subsection}{\numberline {2.2}単語間距離の計算}{1}{}%
-\contentsline {subsection}{\numberline {2.3}最終フレームでの累積距離の計算}{1}{}%
+\contentsline {subsection}{\numberline {2.2}単語間距離の計算}{2}{}%
+\contentsline {subsection}{\numberline {2.3}最終フレームでの累積距離の計算}{2}{}%
 \contentsline {section}{\numberline {3}実験結果}{2}{}%
-\contentsline {subsection}{\numberline {3.1}音声認識の正答率}{2}{}%
-\contentsline {section}{\numberline {4}考察}{2}{}%
-\contentsline {section}{\numberline {A}付録}{2}{}%
-\contentsline {subsection}{\numberline {A.1}付録A}{2}{}%
-\contentsline {subsection}{\numberline {A.2}付録B}{2}{}%
-\contentsline {section}{参考文献}{3}{}%
+\contentsline {section}{\numberline {4}考察}{3}{}%
+\contentsline {section}{\numberline {A}付録}{4}{}%
+\contentsline {subsection}{\numberline {A.1}付録A: 単語間距離を求めるプログラム}{4}{}%
+\contentsline {subsection}{\numberline {A.2}付録B:正答率を計算するプログラム}{8}{}%
+\contentsline {subsection}{\numberline {A.3}付録C:可視化するプログラム}{9}{}%
 \contentsfinish 

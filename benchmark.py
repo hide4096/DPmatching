@@ -42,11 +42,12 @@ def correct_rate(dir1, dir2):
     print()
     return (a-incorrect)/q
 
-args = sys.argv
+if __name__ == "__main__":
+    args = sys.argv
 
-executable_path = args[1]
-dir1_path = args[2]
-dir2_path = args[3]
+    executable_path = args[1]
+    dir1_path = args[2]
+    dir2_path = args[3]
 
-rate = correct_rate(dir1_path, dir2_path)
-print(f"CorrectRate: {round(rate*100.0)}%")
+    rate = correct_rate(dir1_path, dir2_path)
+    print(f"CorrectRate: {round(rate*100.0)}%")

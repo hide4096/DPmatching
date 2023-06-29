@@ -3,7 +3,7 @@
 #include <math.h>
 
 #define STRING_SIZE 64
-//#define PRINT_CSV
+#define PRINT_CSV
 #define EXPORT_G
 struct FILEDATA{
     char filename[STRING_SIZE];

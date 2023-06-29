@@ -4,8 +4,29 @@
 \usepackage{graphicx}
 \usepackage{titletoc}
 \usepackage{lipsum}
+\usepackage{listings}
+\usepackage{filecontents}
 
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
 
 \title{DPマッチングによる単語音声の認識}
 \author{麻生英寿 \\ 21C1005}
@@ -18,29 +39,34 @@
 \tableofcontents
 
 \section{目的}
+
 DPマッチングのアルゴリズムを利用して、小語彙の音声認識の実験を行う。
 
 \section{実験方法}
+
 DPマッチングのアルゴリズムによって音声データの単語間距離を計算するプログラムを作成する。
 そのプログラムに、100単語の音声データのテンプレートに対して、同じ発声内容の100単語を未知入力音声として、順に入力していく。
 入力された音声データの発声内容を判定し、その正答率を計算する。
 
 \subsection{使用したデータセットについて}
+
 この実験で使用した音声データセットには、2人の話者がそれぞれ同じ100種類の単語を発話したものが含まれている。
 話者は100種類の単語の発話を2回行っているため、合計400個の音声データが含まれている。
 1つの音声データにはファイル名、発声内容、フレーム数とフレーム数分の15次のメルケプストラム特徴量である。
 
 \subsection{単語間距離の計算}
+
 実験ではDPマッチングのアルゴリズムを用いて2つの音声データの単語間距離を計算する。
 単語間距離の計算は以下の手順で行う。
 
 入力として与えられた2つの音声データのフレーム長をそれぞれ$I$と$J$とする。
-$(i,j),0<i<=I,0<j<=J$で表せられる2つの音声データの各ノードのメルケプストラム特徴量の距離を計算し、
+$(i,j),0<i\leq I ,0<j\leq J$で表せられる2つの音声データの各ノードのメルケプストラム特徴量の距離を計算し、
 $(i,j)$でのフレームの距離を局所距離$d(i,j)$と表す。
 音声データの最初のフレームから任意のフレームまでの局所距離の総和を累積距離$g(i,j)$とする。
 最終フレームでの累積距離$g(I,J)$が最小となるような経路を探索することで、単語間距離を計算する。
 
 \subsection{最終フレームでの累積距離の計算}
+
 はじめに、初期条件を以下のように設定する。
 \[
     g(0,0) = d(0,0)
@@ -62,6 +88,7 @@ g(i-1, j) & + & d(i, j)
 \]
 
 \section{実験結果}
+
 音声認識の正答率は次のようになった。
 
 \begin{table}[htbp]
@@ -83,37 +110,53 @@ g(i-1, j) & + & d(i, j)
     \label{tab:音声認識の正答率}
   \end{table}
 
+\newpage
+
 \section{考察}
+実験結果より、同一話者よりも異なる話者の音声データの方が正答率が低いことが読み取れる。
+\begin{figure}[h]
+    \centering
+    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./equal.png}
+    \caption{同じ音声データ}
+    \label{fig:equal}
+\end{figure}
 
-\appendix
-\section{付録}
-付録に関する内容をここに書きます。
+\begin{figure}[h]
+    \centering
+    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./same.png}
+    \caption{同一話者}
+    \label{fig:same}
+\end{figure}
 
-\subsection{付録A}
-付録Aの内容をここに書きます。
+\begin{figure}[h]
+    \centering
+    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./diffpeople.png}
+    \caption{異なる話者}
+    \label{fig:diffpeople}
+\end{figure}
 
-\subsection{付録B}
-付録Bの内容をここに書きます。
+\begin{figure}[h]
+    \centering
+    \includegraphics[bb=0.000000 0.000000 1329.122658 697.681395,width=1.0\hsize]{./diffword.png}
+    \caption{異なる話者かつ異なる単語}
+    \label{fig:diffworde}
+\end{figure}
 
 \newpage
 
-\section*{参考文献}
-\addcontentsline{toc}{section}{参考文献}
+\appendix
+\section{付録}
+この実験で使用したプログラムのソースコードを以下に示す。
 
-ここに参考文献の引用を書きます。
+\subsection{付録A: 単語間距離を求めるプログラム}
+\lstinputlisting[language=c]{../two_words.c}
 
-\begin{thebibliography}{9}
-\bibitem{example_reference1}
-  著者名,
-  \textit{タイトル},
-  出版社,
-  年.
-  
-\bibitem{example_reference2}
-  著者名,
-  \textit{タイトル},
-  出版社,
-  年.
-\end{thebibliography}
+\subsection{付録B:正答率を計算するプログラム}
+\lstinputlisting[language=c]{../benchmark.py}
+
+\subsection{付録C:可視化するプログラム}
+\lstinputlisting[language=c]{../heatmap.py}
+
+
 
 \end{document}
